@@ -1,7 +1,7 @@
 {
   "name": "Lectrum",
   "version": "0.1.0",
-  "homepage" : "http://myname.github.io/",
+  "homepage": "http://myname.github.io/",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.2",
