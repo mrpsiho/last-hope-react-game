@@ -1,4 +1,22 @@
 @import '../../theme/palette';
 
 .gamefield {
+
+  .homeBtn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 130px;
+    height: 50px;
+    border: none;
+    background-color: $darkYellow;
+    font-family: AngryBirds, sans-serif;
+    font-size: 23px;
+    color: $black;
+
+    &:hover {
+      background-color: $lightYellow;
+      cursor:pointer;
+    }
+  }
 }

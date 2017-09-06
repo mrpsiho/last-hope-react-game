@@ -1,4 +1,126 @@
 @import '../../theme/palette';
 
 .home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $mainWithOpacity;
+
+  .wheel {
+    position: absolute;
+    width: 860px;
+    top: -120px;
+    left: -200px;
+  }
+
+  .wheeloverlay {
+    position: absolute;
+    width: 360px;
+    top: 66px;
+    left: 30px;
+  }
+
+  .prota {
+    position: absolute;
+    top: 260px;
+    left: 215px;
+    transform: scale(23) rotate(-12deg);
+  }
+
+  h1 {
+    position: absolute;
+    font-family: AngryBirds, sans-serif;
+    font-size: 105px;
+    top: 179px;
+    left: 300px;
+    color: $darkYellow;
+    transform: rotate(-10deg);
+
+    span:nth-child(1) {
+      position: absolute;
+      top: -105px;
+    }
+
+    span:nth-child(2) {
+      position: absolute;
+      top: 9px;
+      left: 56px;
+    }
+  }
+
+  label {
+    position: absolute;
+    display: block;
+    font-family: AngryBirds, sans-serif;
+    font-size: 45px;
+    color: $white;
+    transform: rotate(-2deg);
+  }
+
+  label:nth-of-type(1) {
+    top: 38px;
+    right: 50px;
+  }
+
+  input[type=text] {
+    position: absolute;
+    top: 121px;
+    right: 75px;
+    padding: 0 10px;
+    width: 230px;
+    height: 70px;
+    border: none;
+    font-family: AngryBirds, sans-serif;
+    font-size: 25px;
+  }
+
+  label:nth-of-type(2) {
+    top: 238px;
+    right: 50px;
+  }
+
+  .leaderBtn {
+    position: absolute;
+    bottom: 40px;
+    right: 415px;
+    width: 80px;
+    height: 80px;
+    border: none;
+    background-color: $darkYellow;
+
+    &:hover {
+      background-color: $lightYellow;
+      cursor:pointer;
+    }
+
+    object {
+      position: absolute;
+      top: 9px;
+      left: 0;
+      transform: scale(0.7);
+    }
+  }
+
+  .playBtn {
+    position: absolute;
+    bottom: 40px;
+    right: 75px;
+    width: 250px;
+    height: 80px;
+    border: none;
+    background-color: $darkYellow;
+    font-family: AngryBirds, sans-serif;
+    font-size: 35px;
+    color: $black;
+
+    &:hover {
+      background-color: $lightYellow;
+      cursor:pointer;
+    }
+
+    &:disabled {
+      background-color: $grey;
+    }
+  }
+
 }

@@ -4,13 +4,13 @@ import { shallow } from 'enzyme';
 
 // Tested object
 import App from '../../containers/App';
-import Gameover from '../../components/Gameover';
+import Debriefing from '../../components/Debriefing';
 
-const result = shallow(<Gameover
-    goToHome = { new App().goToHome }
+const result = shallow(<Debriefing
+    goTo = { new App().goTo }
 />);
 
-describe('Gameover (BDD)', () => {
+describe('Debriefing (BDD)', () => {
     test('Must have 1 section element', () => {
         expect(result.find('section').length).toBe(1);
     });

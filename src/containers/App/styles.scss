@@ -1,4 +1,15 @@
 @import '../../theme/palette';
+@font-face {
+  font-family: AngryBirds;
+  src: url(../../theme/fonts/Angry_Birds_Rus.ttf);
+}
 
 .app {
+  position: relative;
+  margin: 3% auto;
+  width: 1046px;
+  height: 600px;
+  border: 10px solid $darkYellow;
+  overflow: hidden;
+  background-image: url(../../theme/assets/gamefield.svg);
 }

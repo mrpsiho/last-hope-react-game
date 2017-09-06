@@ -1,0 +1,41 @@
+@import '../../theme/palette';
+
+.select {
+  position: absolute;
+  right: 30px;
+  bottom: 123px;
+  min-height: 150px;
+  width: 360px;
+
+  a {
+    position: absolute;
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+
+    object {
+      position: absolute;
+      width: 90px;
+      filter: grayscale(1);
+      pointer-events: none;
+    }
+
+    &.active object {
+      filter: grayscale(0);
+    }
+  }
+
+  a:nth-child(1) {
+    top: 40px;
+  }
+
+  a:nth-child(2) {
+    top: 20px;
+    left: 130px;
+  }
+
+  a:nth-child(3) {
+    left: 260px;
+  }
+
+}
