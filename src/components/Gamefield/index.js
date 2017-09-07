@@ -23,7 +23,7 @@ export default class Gamefield extends Component {
         super();
 
         this.clickOnHomeBtn = ::this._clickOnHomeBtn;
-        this._playerChar = ::this._playerChar;
+        this.handleKeyDown = ::this._handleKeyDown;
     }
 
     state = {
@@ -31,12 +31,12 @@ export default class Gamefield extends Component {
             player: {
                 fireCounter: 0, // reloading counter
                 hp:          10, // heal points
-                position:    0 // getElementById(); element.style.top
+                position:    430 // getElementById(); element.style.top
             },
             ai: {
                 fireCounter: 0,
                 hp:          10,
-                position:    0
+                position:    430
             }
         },
         playing: true, // game status
@@ -53,10 +53,6 @@ export default class Gamefield extends Component {
         //clearInterval(this._positionUpdateTimer());
     }
 
-    componentDidMount () {
-        this._playerChar();
-    }
-
     _positionUpdateTimer () {
         return setInterval(() => this._updateCharsPostion(), 500);
     }
@@ -68,8 +64,9 @@ export default class Gamefield extends Component {
         //console.log(this.playerChar);
     }
 
-    _playerChar () {
-        console.log(this.playerChar);
+    _handleKeyDown (e) {
+        e.preventDefault();
+        console.log(e);
     }
 
     _clickOnHomeBtn () {
@@ -77,12 +74,19 @@ export default class Gamefield extends Component {
     }
 
     render () {
-        const style = {
-            top: '50px'
+        const playerY = this.state.chars.player.position;
+        const aiY = this.state.chars.ai.position;
+        const playerTop = {
+            top: `${playerY}px`
+        };
+        const aiTop = {
+            top: `${aiY}px`
         };
 
         return (
-            <section className = { Styles.gamefield }>
+            <section
+                className = { Styles.gamefield }
+                onKeyPress = { this.handleKeyDown }>
                 <TreeOne customClass = { Styles.treeone } />
                 <TreeTwo customClass = { Styles.treetwo } />
                 <Timer customClass = { Styles.timer } />
@@ -94,13 +98,13 @@ export default class Gamefield extends Component {
                 <Char
                     addGas
                     customClass = { Styles.prota }
-                    customStyle = { style }
-                    charRef = { (el) => this.playerChar = el }
+                    customStyle = { playerTop }
                     type = 'player'
                 />
                 <Char
                     addGas
                     customClass = { Styles.anto }
+                    customStyle = { aiTop }
                     type = 'ai'
                 />
             </section>

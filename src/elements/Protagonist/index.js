@@ -6,12 +6,11 @@ import PropTypes from 'prop-types';
 import prota from '../../theme/assets/prota.svg';
 import protaGas from '../../theme/assets/prota_gas.svg';
 
-const Protagonist = ({ addGas = false, charRef, customClass = '', customStyle = {} }) => addGas
+const Protagonist = ({ addGas = false, customClass = '', customStyle = {}}) => addGas
     ? (
         <section
             className = { customClass }
-            style = { customStyle }
-            ref = { (el) => charRef = el }>
+            style = { customStyle }>
             <object
                 data = { prota }
                 type = 'image/svg+xml'>
@@ -25,7 +24,9 @@ const Protagonist = ({ addGas = false, charRef, customClass = '', customStyle = 
         </section>
     )
     : (
-        <section className = { customClass } style = { customStyle }>
+        <section
+            className = { customClass }
+            style = { customStyle }>
             <object
                 data = { prota }
                 type = 'image/svg+xml'>
@@ -36,7 +37,6 @@ const Protagonist = ({ addGas = false, charRef, customClass = '', customStyle = 
 
 Protagonist.propTypes = {
     addGas:      PropTypes.bool,
-    charRef:     PropTypes.func,
     customClass: PropTypes.string,
     customStyle: PropTypes.object
 };

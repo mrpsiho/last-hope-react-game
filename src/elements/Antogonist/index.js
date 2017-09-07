@@ -6,9 +6,11 @@ import PropTypes from 'prop-types';
 import anto from '../../theme/assets/anto.svg';
 import antoGas from '../../theme/assets/anto_gas.svg';
 
-const Antogonist = ({ addGas = false, customClass = '' }) => addGas
+const Antogonist = ({ addGas = false, customClass = '', customStyle = {}}) => addGas
     ? (
-        <section className = { customClass }>
+        <section
+            className = { customClass }
+            style = { customStyle }>
             <object
                 data = { anto }
                 type = 'image/svg+xml'>
@@ -22,7 +24,9 @@ const Antogonist = ({ addGas = false, customClass = '' }) => addGas
         </section>
     )
     : (
-        <section className = { customClass }>
+        <section
+            className = { customClass }
+            style = { customStyle }>
             <object
                 data = { anto }
                 type = 'image/svg+xml'>
@@ -33,7 +37,8 @@ const Antogonist = ({ addGas = false, customClass = '' }) => addGas
 
 Antogonist.propTypes = {
     addGas:      PropTypes.bool,
-    customClass: PropTypes.string
+    customClass: PropTypes.string,
+    customStyle: PropTypes.object
 };
 
 export default Antogonist;
