@@ -2,6 +2,55 @@
 
 .gamefield {
 
+  .prota {
+    position: absolute;
+    top: 430px;
+    left: 140px;
+    width: 60px;
+
+    object:nth-of-type(2) {
+      position: absolute;
+      left: -11px;
+      top: 60px;
+      width: 30px;
+    }
+  }
+
+  .anto {
+    position: absolute;
+    top: 430px;
+    right: 140px;
+    width: 60px;
+
+    object:nth-of-type(2) {
+      position: absolute;
+      right: -6px;
+      top: 51px;
+      width: 30px;
+    }
+  }
+
+  .treeone {
+    position: absolute;
+    top: 335px;
+    left: 37px;
+    width: 130px;
+  }
+
+  .treetwo {
+    position: absolute;
+    top: 365px;
+    right: 37px;
+    width: 160px;
+  }
+
+  .timer {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    width: 100px;
+  }
+
   .homeBtn {
     position: absolute;
     top: 30px;

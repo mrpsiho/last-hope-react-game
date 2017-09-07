@@ -43,7 +43,7 @@ export default class DifficultySelect extends Component {
         const { difficulty } = this.props;
         const badgeEasy = difficulty === 'easy'
             ? <a
-                className = 'active'
+                className = { Styles.active }
                 href = '#'
                 onClick = { this.handleClickEasy }>
                 <BadgeEasy />
@@ -55,6 +55,7 @@ export default class DifficultySelect extends Component {
             </a>;
         const badgeNormal = difficulty === 'normal'
             ? <a
+                className = { Styles.active }
                 href = '#'
                 onClick = { this.handleClickNormal }>
                 <BadgeNormal />
@@ -66,6 +67,7 @@ export default class DifficultySelect extends Component {
             </a>;
         const badgeHard = difficulty === 'hard'
             ? <a
+                className = { Styles.active }
                 href = '#'
                 onClick = { this.handleClickHard }>
                 <BadgeHard />

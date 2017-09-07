@@ -44,11 +44,6 @@ export default class App extends Component {
     };
 
     _changeGameProps = ({ difficulty, name }) => {
-        // if (difficulty) {
-        //     this.setState({ difficulty });
-        // } else if (name) {
-        //     this.setState({ difficulty, name });
-        // }
         this.setState({ difficulty, name });
     };
 
@@ -62,6 +57,7 @@ export default class App extends Component {
 
     render () {
         const { screen, difficulty } = this.state;
+
         const home = screen === 'home'
             ? <Home
                 changeGameProps = { this.changeGameProps }

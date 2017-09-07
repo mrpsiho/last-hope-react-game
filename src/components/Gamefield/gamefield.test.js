@@ -29,7 +29,7 @@ const state = {
         }
     },
     playing: true, // game status
-    timer:   props.round, // seconds left
+    timer:   0, // seconds left
     status:  '' // result status ('success'|'fail')
 };
 const result = render(<Gamefield

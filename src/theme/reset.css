@@ -238,6 +238,9 @@ svg:not(:root) {
   overflow: hidden;
 }
 
+object {
+  pointer-events: none;
+}
 /* Forms
    ========================================================================== */
 

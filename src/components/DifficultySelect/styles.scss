@@ -12,12 +12,12 @@
     display: inline-block;
     width: 90px;
     height: 90px;
+    outline: none;
 
     object {
       position: absolute;
       width: 90px;
       filter: grayscale(1);
-      pointer-events: none;
     }
 
     &.active object {
