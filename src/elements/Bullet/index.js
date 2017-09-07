@@ -5,17 +5,21 @@ import PropTypes from 'prop-types';
 // Assets
 import bullet from '../../theme/assets/bullet.svg';
 
-const Bullet = ({ customClass }) => (
-    <object
+const Bullet = ({ customClass, customStyle }) => (
+    <section
         className = { customClass }
-        data = { bullet }
-        type = 'image/svg+xml'>
-        Your browser does not support SVGs
-    </object>
+        style = { customStyle }>
+        <object
+            data = { bullet }
+            type = 'image/svg+xml'>
+            Your browser does not support SVGs
+        </object>
+    </section>
 );
 
 Bullet.propTypes = {
-    customClass: PropTypes.string
+    customClass: PropTypes.string,
+    customStyle: PropTypes.object
 };
 
 export default Bullet;

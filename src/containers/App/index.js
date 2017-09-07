@@ -12,13 +12,13 @@ import Gamefield from '../../components/Gamefield';
 
 export const gameCfg = {
     easy: {
-        fireDelay:       2,
+        fireDelay:       4,
         round:           30,
         scoreMultiplier: 3
     },
     normal: {
-        fireDelay:       3,
-        round:           20,
+        fireDelay:       4,
+        round:           18,
         scoreMultiplier: 3
     },
     hard: {
