@@ -1,5 +1,6 @@
 // Core
 import React, { Component } from 'react';
+import firebase from '../../firebase';
 
 // Instruments
 import Styles from './styles.scss';
@@ -64,7 +65,7 @@ export default class App extends Component {
 
         if (status === true) {
             newStatus = 'succeeded';
-            this._addScore(name, score);
+            this._addScore(difficulty, name, score);
         }
         this.setState(
             {
@@ -76,8 +77,11 @@ export default class App extends Component {
         );
     }
 
-    _addScore (name, score) {
-        console.log('score:', name, score);
+    _addScore (difficulty, name, score) {
+        const scoresRef = firebase.database().ref(`records/${difficulty}`);
+
+        //console.log('score:', name, score);
+        scoresRef.push({ name, score });
     }
 
     render () {

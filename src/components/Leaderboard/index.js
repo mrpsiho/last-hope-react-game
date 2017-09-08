@@ -1,6 +1,7 @@
 // Core
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import firebase from '../../firebase';
 
 // Instruments
 import Styles from './styles.scss';
@@ -31,6 +32,32 @@ export default class Leaderboard extends Component {
         }
 
     };
+
+    componentWillMount () {
+        const recordsRef = firebase.database().ref('records');
+
+        recordsRef.on('value', (snapshot) => {
+            const records = snapshot.val();
+            const newRecords = {
+                easy:   [],
+                normal: [],
+                hard:   []
+            };
+
+            for (const group in records) {
+                for (const key in records[group]) {
+                    const tempObj = {
+                        name:  records[group][key].name,
+                        score: records[group][key].score
+                    };
+
+                    newRecords[group].push(tempObj);
+                }
+            }
+            //console.log(newRecords);
+            this.setState({ records: newRecords });
+        });
+    }
 
     _clickOnHomeBtn () {
         this.props.goTo('home');
