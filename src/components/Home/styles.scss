@@ -21,10 +21,15 @@
   }
 
   .prota {
-    position: absolute;
+    /*position: absolute;
     top: 260px;
     left: 215px;
-    transform: scale(23) rotate(-12deg);
+    transform: scale(23) rotate(-12deg);*/
+    position: absolute;
+    top: 155px;
+    left: 117px;
+    width: 230px;
+    transform: rotate(-12deg);
   }
 
   h1 {
@@ -34,6 +39,7 @@
     top: 179px;
     left: 300px;
     color: $darkYellow;
+    text-shadow: -5px 5px 0 $textShadow;
     transform: rotate(-10deg);
 
     span:nth-child(1) {
@@ -54,6 +60,7 @@
     font-family: AngryBirds, sans-serif;
     font-size: 45px;
     color: $white;
+    text-shadow: -2px 2px 0 $textShadow;
     transform: rotate(-2deg);
   }
 

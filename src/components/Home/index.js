@@ -53,8 +53,7 @@ export default class Home extends Component {
 
     _clickOnPlayBtn () {
         if (this.props.name) {
-            //this.props.goTo('briefing');
-            this.props.goTo('gamefield'); // temp change
+            this.props.goTo('briefing');
         }
     }
 

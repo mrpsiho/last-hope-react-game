@@ -59,7 +59,7 @@ export default class App extends Component {
 
     _endGame (status, timeLeft) {
         const { difficulty, name } = this.state;
-        const score = timeLeft*gameCfg[difficulty].scoreMultiplier;
+        const score = Math.round(timeLeft) * gameCfg[difficulty].scoreMultiplier;
         let newStatus = 'failed';
 
         if (status === true) {
@@ -95,7 +95,10 @@ export default class App extends Component {
             ? <Leaderboard goTo = { this.goTo } />
             : null;
         const briefing = screen === 'briefing'
-            ? <Briefing name = { this.state.name } />
+            ? <Briefing
+                goTo = { this.goTo }
+                name = { this.state.name }
+            />
             : null;
         const gamefield = screen === 'gamefield'
             ? <Gamefield

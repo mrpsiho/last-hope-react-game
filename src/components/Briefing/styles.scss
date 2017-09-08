@@ -1,4 +1,85 @@
 @import '../../theme/palette';
 
 .briefing {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $mainWithOpacity;
+
+  .wheel {
+    position: absolute;
+    top: -125px;
+    left: 405px;
+    width: 800px;
+  }
+
+  .badge {
+    position: absolute;
+    top: 58px;
+    left: 67px;
+    width: 200px;
+  }
+
+  h2, span {
+    position: absolute;
+    font-family: AngryBirds, sans-serif;
+    color: $darkYellow;
+    transform: rotate(-2deg);
+  }
+
+  h2 {
+    top: 39px;
+    left: 90px;
+    font-size: 35px;
+    text-shadow: -3px 3px 0 $textShadow;
+  }
+
+  span {
+    top: 440px;
+    right: 75px;
+    font-size: 45px;
+    text-shadow: -3px 3px 0 $textShadow;
+  }
+
+  div {
+    position: absolute;
+    top: 90px;
+    left: 33px;
+    width: 505px;
+    height: 320px;
+    background-color: $lightYellow;
+    padding: 30px;
+    box-shadow: -7px 7px 0 $textShadow;
+
+    p {
+      font-family: Courier, sans-serif;
+      font-size: 29px;
+    }
+  }
+
+  .rogers {
+    position: absolute;
+    width: 240px;
+    top: 110px;
+    right: 92px;
+  }
+
+  button {
+    position: absolute;
+    bottom: 60px;
+    left: 385px;
+    width: 180px;
+    height: 80px;
+    border: none;
+    background-color: $darkYellow;
+    font-family: AngryBirds, sans-serif;
+    font-size: 35px;
+    color: #000;
+    box-shadow: -4px 4px 0 $textShadow;
+
+    &:hover {
+      background-color: $lightYellow;
+      cursor:pointer;
+    }
+  }
 }

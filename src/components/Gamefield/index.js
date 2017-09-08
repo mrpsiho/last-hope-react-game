@@ -77,12 +77,12 @@ export default class Gamefield extends Component {
     }
 
     componentWillUnmount () {
-        clearInterval(this._updateGame());
+        clearInterval(this.interval);
         window.removeEventListener('keydown', this.handleKeyDown);
     }
 
     _updateGame () {
-        return setInterval(() => this._updateEverything(), 200);
+        this.interval = setInterval(() => this._updateEverything(), 200);
     }
 
     _updateEverything () {
