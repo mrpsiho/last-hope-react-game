@@ -1,6 +1,6 @@
 // Core
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 
 // Tested object
 import App, { gameCfg } from '../../containers/App';
@@ -16,30 +16,36 @@ const props = {
     round
 };
 const state = {
-    chars: {
-        player: {
-            fireCounter: 0, // reloading counter
-            hp:          10, // heal points
-            position:    0 // getElementById(); element.style.top
-        },
-        ai: {
-            fireCounter: 0,
-            hp:          10,
-            position:    0
-        }
+    player: {
+        fireCounter: fireDelay, // reloading counter
+        hp:          10, // heal points
+        position:    430 // getElementById(); element.style.top
     },
-    playing: true, // game status
-    timer:   0, // seconds left
-    status:  '' // result status ('success'|'fail')
+    playerBullet: {
+        fired: false,
+        x:     190,
+        y:     0
+    },
+    ai: {
+        fireCounter: fireDelay,
+        hp:          10,
+        position:    430,
+        direction:   'up'
+    },
+    aiBullet: {
+        fired: false,
+        x:     760
+    },
+    timer: round // seconds left
 };
-const result = render(<Gamefield
+const result = shallow(<Gamefield
     endGame = { new App().endGame }
     fireDelay = { props.fireDelay }
     goTo = { new App().goTo }
     round = { props.round }
 />);
 
-describe('Gamefield (BDD)', () => {
+describe('Gamefield (TDD)', () => {
     test('endGame prop is mandatory', () => {
         const type = typeof result.instance().props.endGame;
 
@@ -49,7 +55,7 @@ describe('Gamefield (BDD)', () => {
     test('fireDelay prop is mandatory', () => {
         const type = typeof result.instance().props.fireDelay;
 
-        expect(type).toEqual('integer');
+        expect(type).toEqual('number');
     });
 
     test('goTo prop is mandatory', () => {
@@ -61,7 +67,7 @@ describe('Gamefield (BDD)', () => {
     test('round prop is mandatory', () => {
         const type = typeof result.instance().props.round;
 
-        expect(type).toEqual('integer');
+        expect(type).toEqual('number');
     });
 
     test('Initial state check', () => {

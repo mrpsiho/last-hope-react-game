@@ -44,19 +44,19 @@ describe('Leaderboard (TDD)', () => {
         expect(result.find('section').length).toBe(1);
     });
 
-    test('Must have 1 section element', () => {
+    test('Must have 1 BadgeGenericDoubleSided', () => {
         expect(result.find(BadgeGenericDoubleSided).length).toBe(1);
     });
 
-    test('Must have 1 section element', () => {
+    test('Must have 1 BadgeEasy', () => {
         expect(result.find(BadgeEasy).length).toBe(1);
     });
 
-    test('Must have 1 section element', () => {
+    test('Must have 1 BadgeNormal', () => {
         expect(result.find(BadgeNormal).length).toBe(1);
     });
 
-    test('Must have 1 section element', () => {
+    test('Must have 1 BadgeHard', () => {
         expect(result.find(BadgeHard).length).toBe(1);
     });
 

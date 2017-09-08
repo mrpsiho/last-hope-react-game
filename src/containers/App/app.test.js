@@ -13,14 +13,16 @@ import Debriefing from '../../components/Debriefing';
 const state = {
     difficulty: 'easy',
     name:       '',
-    screen:     'home'
+    screen:     'home',
+    status:     ''
 };
 const newDifficulty = 'normal';
 const newName = 'Vitalii';
 const newState = {
     difficulty: newDifficulty,
     name:       newName,
-    screen:     'home'
+    screen:     'home',
+    status:     ''
 };
 const result = shallow(<App />);
 

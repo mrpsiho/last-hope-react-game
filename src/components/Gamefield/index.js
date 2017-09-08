@@ -34,7 +34,9 @@ export default class Gamefield extends Component {
             position:    430
         },
         playerBullet: {
-            x: 190
+            fired: false,
+            x:     190,
+            y:     0
         },
         ai: {
             fireCounter: 0,
@@ -43,18 +45,17 @@ export default class Gamefield extends Component {
             direction:   'up'
         },
         aiBullet: {
-            x: 760
+            fired: false,
+            x:     760
         },
-        playing: true, // game status
-        timer:   0, // seconds left
-        status:  '' // result status ('success'|'fail')
+        timer: 0
     };
 
     componentWillMount () {
         const { fireDelay, round } = this.props;
 
-        this.setState(({ player, playerBullet, ai, aiBullet, playing, status }) => {
-            return {
+        this.setState(({ player, playerBullet, ai, aiBullet }) =>
+            ({
                 player: {
                     fireCounter: fireDelay,
                     hp:          player.hp,
@@ -68,31 +69,37 @@ export default class Gamefield extends Component {
                     direction:   'up'
                 },
                 aiBullet,
-                playing,
-                timer: round,
-                status
-            };
-        });
-        //this._updateCharsPostion();
-        this._updateTimer();
+                timer: round
+            })
+        );
+        this._updateGame();
         window.addEventListener('keydown', this.handleKeyDown);
     }
 
     componentWillUnmount () {
-        clearInterval(this._updateTimer());
+        clearInterval(this._updateGame());
         window.removeEventListener('keydown', this.handleKeyDown);
     }
 
-    _updateTimer () {
-        return setInterval(() => this._updateCounters(), 200);
+    _updateGame () {
+        return setInterval(() => this._updateEverything(), 200);
     }
 
-    _updateCounters () {
-        this.setState(({ player, playerBullet, ai, aiBullet, playing, timer, status }) => {
-            const newTimer = timer >= 0 ? timer - 0.2 : 0;
+    _updateEverything () {
+        this.setState(({ player, playerBullet, ai, aiBullet, timer }) => {
+            let playerBulletNewX = playerBullet.x;
+            let playerBulletNewStatus = playerBullet.fired;
             let newAiPosition = ai.position;
             let newAiDirection = ai.direction;
+            const newTimer = timer - 0.2 > 0 ? timer - 0.2 : 0;
+            let playerWon = false;
 
+            if (playerBullet.fired && playerBullet.x + 35 <= 1000) {
+                playerBulletNewX = playerBullet.x + 35;
+            } else if (playerBullet.fired) {
+                playerBulletNewX = 1000;
+                playerBulletNewStatus = false;
+            }
             if (ai.direction === 'up') {
                 newAiPosition = newAiPosition - 3 > 100
                     ? newAiPosition - 12 : 100;
@@ -106,49 +113,74 @@ export default class Gamefield extends Component {
                 newAiDirection = 'up';
             }
 
-            return {
-                player: {
-                    fireCounter: player.fireCounter - 0.2,
-                    hp:          player.hp,
-                    position:    player.position
-                },
-                playerBullet,
-                ai: {
-                    fireCounter: ai.fireCounter - 0.2,
-                    hp:          ai.hp,
-                    position:    newAiPosition,
-                    direction:   newAiDirection
-                },
-                aiBullet,
-                playing,
-                timer: newTimer,
-                status
-            };
+            if (playerBullet.fired) {
+                playerWon = this._evaluateCollision(playerBullet.x, playerBullet.y, newAiPosition);
+            }
+
+            if (playerWon) {
+                this.props.endGame(true, timer);
+            } else if (timer === 0) {
+                this.props.endGame(false);
+            } else {
+
+                return {
+                    player: {
+                        fireCounter: player.fireCounter - 0.2 >= 0 ? player.fireCounter - 0.2 : 0,
+                        hp:          player.hp,
+                        position:    player.position
+                    },
+                    playerBullet: {
+                        fired: playerBulletNewStatus,
+                        x:     playerBulletNewX,
+                        y:     playerBullet.y
+                    },
+                    ai: {
+                        fireCounter: ai.fireCounter - 0.2 >= 0 ? ai.fireCounter - 0.2 : 0,
+                        hp:          ai.hp,
+                        position:    newAiPosition,
+                        direction:   newAiDirection
+                    },
+                    aiBullet,
+                    timer: newTimer
+                };
+
+            }
         });
     }
 
+    _evaluateCollision (pBulletX, pBulletY, aiPos) {
+        const val = aiPos + 20 - pBulletY;
+
+        // 25 is rather abitrary number that corrects target zone
+        if (pBulletX > 760 && pBulletX < 790 && Math.abs(val) < 25) {
+            //console.log( 'bullet in target!', pBulletX, pBulletY );
+            return true;
+        }
+
+        return false;
+    }
+
     _fire () {
-        const { fireCounter } = this.state.player;
+        const { player, playerBullet } = this.state;
 
-        if (fireCounter <= 0) {
-            console.log('fire allowed!');
-            // TODO fire bullet
-
-            this.setState(({ player, playerBullet, ai, aiBullet, playing, timer, status }) => {
-                return {
+        if (player.fireCounter === 0 && !playerBullet.fired) {
+            this.setState(({ ai, aiBullet, timer }) =>
+                ({
                     player: {
                         fireCounter: this.props.fireDelay,
                         hp:          player.hp,
                         position:    player.position
                     },
-                    playerBullet,
+                    playerBullet: {
+                        fired: true,
+                        x:     190,
+                        y:     player.position + 32
+                    },
                     ai,
                     aiBullet,
-                    playing,
-                    timer,
-                    status
-                };
-            });
+                    timer
+                })
+            );
         }
     }
 
@@ -177,8 +209,8 @@ export default class Gamefield extends Component {
                 }
             }
 
-            this.setState(({ player, playerBullet, ai, aiBullet, playing, timer, status }) => {
-                return {
+            this.setState(({ player, playerBullet, ai, aiBullet, timer }) =>
+                ({
                     player: {
                         fireCounter: player.fireCounter,
                         hp:          player.hp,
@@ -187,11 +219,9 @@ export default class Gamefield extends Component {
                     playerBullet,
                     ai,
                     aiBullet,
-                    playing,
-                    timer,
-                    status
-                };
-            });
+                    timer
+                })
+            );
         }
     }
 
@@ -200,15 +230,16 @@ export default class Gamefield extends Component {
     }
 
     render () {
-        const { timer } = this.state;
+        const { playerBullet, timer } = this.state;
         const playerY = this.state.player.position;
         const playerTop = {
             top: `${playerY}px`
         };
         const bulletTop = {
-            top: `${playerY + 32}px`
+            top:  `${playerBullet.y}px`,
+            left: `${playerBullet.x}px`
         };
-        const bulletPlayer = timer < 30
+        const bulletPlayer = playerBullet.fired
             ? <Bullet
                 customClass = { Styles.bulletPlayer }
                 customStyle = { bulletTop }
