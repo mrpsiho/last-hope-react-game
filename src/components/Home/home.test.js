@@ -5,9 +5,9 @@ import { shallow } from 'enzyme';
 // Tested object
 import App from '../../containers/App';
 import Home from '../../components/Home';
-import Wheel from '../../elements/Wheel';
-import WheelOverlay from '../../elements/WheelOverlay';
-import Protagonist from '../../elements/Protagonist';
+import Wheel from '../../components/elements/Wheel';
+import WheelOverlay from '../../components/elements/WheelOverlay';
+import Protagonist from '../../components/elements/Protagonist';
 import DifficultySelect from '../../components/DifficultySelect';
 
 const state = {

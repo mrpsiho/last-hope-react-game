@@ -5,8 +5,8 @@ import { shallow } from 'enzyme';
 // Tested object
 import App from '../../containers/App';
 import Debriefing from '../../components/Debriefing';
-import Stars from '../../elements/Stars';
-import Wheel from '../../elements/Wheel';
+import Stars from '../../components/elements/Stars';
+import Wheel from '../../components/elements/Wheel';
 
 const result = shallow(<Debriefing
     goTo = { new App().goTo }

@@ -5,9 +5,9 @@ import { shallow } from 'enzyme';
 // Tested object
 import App from '../../containers/App';
 import Briefing from '../../components/Briefing';
-import BadgeGenericTrapezium from '../../elements/BadgeGenericTrapezium';
-import Rogers from '../../elements/Rogers';
-import Wheel from '../../elements/Wheel';
+import BadgeGenericTrapezium from '../../components/elements/BadgeGenericTrapezium';
+import Rogers from '../../components/elements/Rogers';
+import Wheel from '../../components/elements/Wheel';
 
 const props = {
     name: 'Vitalii'

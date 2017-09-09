@@ -6,9 +6,9 @@ import { shallow } from 'enzyme';
 import App, { gameCfg } from '../../containers/App';
 import Gamefield from '../../components/Gamefield';
 import Char from '../../components/Char';
-import TreeOne from '../../elements/TreeOne';
-import TreeTwo from '../../elements/TreeTwo';
-import Timer from '../../elements/Timer';
+import TreeOne from '../../components/elements/TreeOne';
+import TreeTwo from '../../components/elements/TreeTwo';
+import Timer from '../../components/elements/Timer';
 
 const { fireDelay, round } = gameCfg.easy;
 const props = {
@@ -17,7 +17,7 @@ const props = {
 };
 const state = {
     player: {
-        fireCounter: fireDelay, // reloading counter
+        fireCounter: 0, // reloading counter
         hp:          10, // heal points
         position:    430 // getElementById(); element.style.top
     },
@@ -27,7 +27,7 @@ const state = {
         y:     0
     },
     ai: {
-        fireCounter: fireDelay,
+        fireCounter: 0,
         hp:          10,
         position:    430,
         direction:   'up'

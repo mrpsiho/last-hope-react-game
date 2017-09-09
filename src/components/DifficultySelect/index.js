@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import Styles from './styles.scss';
 
 // Components
-import BadgeEasy from '../../elements/BadgeEasy';
-import BadgeNormal from '../../elements/BadgeNormal';
-import BadgeHard from '../../elements/BadgeHard';
+import BadgeEasy from '../../components/elements/BadgeEasy';
+import BadgeNormal from '../../components/elements/BadgeNormal';
+import BadgeHard from '../../components/elements/BadgeHard';
 
 export default class DifficultySelect extends Component {
     static propTypes = {

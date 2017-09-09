@@ -5,10 +5,10 @@ import { shallow } from 'enzyme';
 // Tested object
 import App from '../../containers/App';
 import Leaderboard from '../../components/Leaderboard';
-import BadgeGenericDoubleSided from '../../elements/BadgeGenericDoubleSided';
-import BadgeEasy from '../../elements/BadgeEasy';
-import BadgeNormal from '../../elements/BadgeNormal';
-import BadgeHard from '../../elements/BadgeHard';
+import BadgeGenericDoubleSided from '../../components/elements/BadgeGenericDoubleSided';
+import BadgeEasy from '../../components/elements/BadgeEasy';
+import BadgeNormal from '../../components/elements/BadgeNormal';
+import BadgeHard from '../../components/elements/BadgeHard';
 
 // test state
 // state = {

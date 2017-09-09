@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import Styles from './styles.scss';
 
 // Components
-import Wheel from '../../elements/Wheel';
-import WheelOverlay from '../../elements/WheelOverlay';
-import LeaderIcon from '../../elements/LeaderIcon';
-import Protagonist from '../../elements/Protagonist';
+import Wheel from '../../components/elements/Wheel';
+import WheelOverlay from '../../components/elements/WheelOverlay';
+import LeaderIcon from '../../components/elements/LeaderIcon';
+import Protagonist from '../../components/elements/Protagonist';
 import DifficultySelect from '../../components/DifficultySelect';
 
 export default class Home extends Component {
@@ -30,12 +30,14 @@ export default class Home extends Component {
     }
 
     _handleNameChange (e) {
-        const data = {
-            difficulty: this.props.difficulty,
-            name:       e.target.value
-        };
+        if (e.target.value.length <= 15) {
+            const data = {
+                difficulty: this.props.difficulty,
+                name:       e.target.value
+            };
 
-        this.props.changeGameProps(data);
+            this.props.changeGameProps(data);
+        }
     }
 
     _handleDifficultyChange (difficulty) {

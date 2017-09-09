@@ -2,12 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// Instruments
-//import Styles from './styles.scss';
-
 // Components
-import Protagonist from '../../elements/Protagonist';
-import Antogonist from '../../elements/Antogonist';
+import Protagonist from '../../components/elements/Protagonist';
+import Antogonist from '../../components/elements/Antogonist';
 
 export default class Char extends Component {
     static propTypes = {

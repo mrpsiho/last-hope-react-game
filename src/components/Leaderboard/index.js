@@ -8,10 +8,10 @@ import Styles from './styles.scss';
 import { getUniqueID } from '../../helpers';
 
 // Components
-import BadgeGenericDoubleSided from '../../elements/BadgeGenericDoubleSided';
-import BadgeEasy from '../../elements/BadgeEasy';
-import BadgeNormal from '../../elements/BadgeNormal';
-import BadgeHard from '../../elements/BadgeHard';
+import BadgeGenericDoubleSided from '../../components/elements/BadgeGenericDoubleSided';
+import BadgeEasy from '../../components/elements/BadgeEasy';
+import BadgeNormal from '../../components/elements/BadgeNormal';
+import BadgeHard from '../../components/elements/BadgeHard';
 
 export default class Leaderboard extends Component {
     static propTypes = {

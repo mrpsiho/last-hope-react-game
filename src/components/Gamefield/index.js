@@ -7,10 +7,10 @@ import Styles from './styles.scss';
 
 // Components
 import Char from '../../components/Char';
-import TreeOne from '../../elements/TreeOne';
-import TreeTwo from '../../elements/TreeTwo';
-import Timer from '../../elements/Timer';
-import Bullet from '../../elements/Bullet';
+import TreeOne from '../../components/elements/TreeOne';
+import TreeTwo from '../../components/elements/TreeTwo';
+import Timer from '../../components/elements/Timer';
+import Bullet from '../../components/elements/Bullet';
 
 export default class Gamefield extends Component {
     static propTypes = {

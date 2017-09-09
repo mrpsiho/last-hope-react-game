@@ -34,19 +34,50 @@
     text-shadow: -3px 3px 0 $textShadow;
   }
 
-  span {
+  .captain {
     top: 440px;
     right: 75px;
     font-size: 45px;
     text-shadow: -3px 3px 0 $textShadow;
   }
 
-  div {
+  .help-appear {
+    opacity: 0.01;
+  }
+
+  .help-appear.help-appear-active {
+    opacity: 1;
+    transition: opacity 1200ms ease-in;
+  }
+
+  .help-exit {
+    opacity: 1;
+  }
+
+  .help-exit.help-exit-active {
+    opacity: 0.01;
+    transition: opacity 1200ms ease-in;
+  }
+
+  .tip {
+    position: absolute;
+    bottom: 30px;
+    left: 180px;
+    width: 680px;
+    padding: 5px 0;
+    background-color: black;
+    font-family: Courier, sans-serif;
+    color: $white;
+    text-align: center;
+    transform: none;
+  }
+
+  .textWrapper {
     position: absolute;
     top: 90px;
     left: 33px;
     width: 505px;
-    height: 320px;
+    height: 310px;
     background-color: $lightYellow;
     padding: 30px;
     box-shadow: -7px 7px 0 $textShadow;
@@ -66,7 +97,7 @@
 
   button {
     position: absolute;
-    bottom: 60px;
+    bottom: 70px;
     left: 385px;
     width: 180px;
     height: 80px;

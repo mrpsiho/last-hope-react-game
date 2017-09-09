@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import Styles from './styles.scss';
 
 // Components
-import Stars from '../../elements/Stars';
-import Wheel from '../../elements/Wheel';
+import Stars from '../../components/elements/Stars';
+import Wheel from '../../components/elements/Wheel';
 
 export default class Debriefing extends Component {
     static propTypes = {
