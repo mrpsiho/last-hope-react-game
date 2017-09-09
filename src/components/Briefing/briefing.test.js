@@ -18,10 +18,6 @@ const result = shallow(<Briefing
 />);
 
 describe('Briefing (TDD)', () => {
-    test('Name prop is mandatory', () => {
-        expect(result.props().name).toEqual('Success!');
-    });
-
     test('Must have 1 section element', () => {
         expect(result.find('section').length).toBe(1);
     });
@@ -36,6 +32,10 @@ describe('Briefing (TDD)', () => {
 
     test('Must have 1 h2 element', () => {
         expect(result.find('h2').length).toBe(1);
+    });
+
+    test('Must have 1 div', () => {
+        expect(result.find('div').length).toBe(1);
     });
 
     test('Must have 1 paragraph', () => {
@@ -56,8 +56,8 @@ describe('Briefing (TDD)', () => {
         expect(type).toEqual('function');
     });
 
-    test('name prop is mandatory and must be a sting', () => {
-        const type = typeof result.instance().props.goTo;
+    test('name prop is mandatory and must be a string', () => {
+        const type = typeof result.instance().props.name;
 
         expect(type).toEqual('string');
     });

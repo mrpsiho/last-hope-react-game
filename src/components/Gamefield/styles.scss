@@ -20,25 +20,6 @@
     top: 430px;
     left: 760px;
     width: 60px;
-    /*-webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-    transition: transform 300ms linear;
-    will-change: transform;*/
-    /*animation: aiAnimationFrames linear 4s;
-    animation-iteration-count: 200;
-    transform-origin: 50% 50%;
-    -webkit-animation: aiAnimationFrames linear 6s;
-    -webkit-animation-iteration-count: 200;
-    -webkit-transform-origin: 50% 50%;
-    -moz-animation: aiAnimationFrames linear 6s;
-    -moz-animation-iteration-count: 200;
-    -moz-transform-origin: 50% 50%;
-    -o-animation: aiAnimationFrames linear 6s;
-    -o-animation-iteration-count: 200;
-    -o-transform-origin: 50% 50%;
-    -ms-animation: aiAnimationFrames linear 6s;
-    -ms-animation-iteration-count: 200;
-    -ms-transform-origin: 50% 50%;*/
 
     object:nth-of-type(2) {
       position: absolute;
@@ -47,96 +28,6 @@
       width: 30px;
     }
   }
-
-  /*@keyframes aiAnimationFrames{
-    0% {
-      transform:  translate(760px,430px)  ;
-    }
-    25% {
-      transform:  translate(760px,265px)  ;
-    }
-    50% {
-      transform:  translate(760px,100px)  ;
-    }
-    75% {
-      transform:  translate(760px,265px)  ;
-    }
-    100% {
-      transform:  translate(760px,430px)  ;
-    }
-  }
-
-  @-moz-keyframes aiAnimationFrames {
-    0% {
-      -moz-transform:  translate(760px,430px)  ;
-    }
-    25% {
-      -moz-transform:  translate(760px,265px)  ;
-    }
-    50% {
-      -moz-transform:  translate(760px,100px)  ;
-    }
-    75% {
-      -moz-transform:  translate(760px,265px)  ;
-    }
-    100% {
-      -moz-transform:  translate(760px,430px)  ;
-    }
-  }
-
-  @-webkit-keyframes aiAnimationFrames {
-    0% {
-      -webkit-transform:  translate(760px,430px)  ;
-    }
-    25% {
-      -webkit-transform:  translate(760px,265px)  ;
-    }
-    50% {
-      -webkit-transform:  translate(760px,100px)  ;
-    }
-    75% {
-      -webkit-transform:  translate(760px,265px)  ;
-    }
-    100% {
-      -webkit-transform:  translate(760px,430px)  ;
-    }
-  }
-
-  @-o-keyframes aiAnimationFrames {
-    0% {
-      -o-transform:  translate(760px,430px)  ;
-    }
-    25% {
-      -o-transform:  translate(760px,265px)  ;
-    }
-    50% {
-      -o-transform:  translate(760px,100px)  ;
-    }
-    75% {
-      -o-transform:  translate(760px,265px)  ;
-    }
-    100% {
-      -o-transform:  translate(760px,430px)  ;
-    }
-  }
-
-  @-ms-keyframes aiAnimationFrames {
-    0% {
-      -ms-transform:  translate(760px,430px)  ;
-    }
-    25% {
-      -ms-transform:  translate(760px,265px)  ;
-    }
-    50% {
-      -ms-transform:  translate(760px,100px)  ;
-    }
-    75% {
-      -ms-transform:  translate(760px,265px)  ;
-    }
-    100% {
-      -ms-transform:  translate(760px,430px)  ;
-    }
-  }*/
 
   .treeone {
     position: absolute;

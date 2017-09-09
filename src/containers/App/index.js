@@ -80,52 +80,59 @@ export default class App extends Component {
     _addScore (difficulty, name, score) {
         const scoresRef = firebase.database().ref(`records/${difficulty}`);
 
-        //console.log('score:', name, score);
         scoresRef.push({ name, score });
     }
 
     render () {
         const { screen, difficulty, status } = this.state;
+        let displayScreen = '';
 
-        const home = screen === 'home'
-            ? <Home
-                changeGameProps = { this.changeGameProps }
-                difficulty = { this.state.difficulty }
-                goTo = { this.goTo }
-                name = { this.state.name }
-            />
-            : null;
-        const leaderboard = screen === 'leaderboard'
-            ? <Leaderboard goTo = { this.goTo } />
-            : null;
-        const briefing = screen === 'briefing'
-            ? <Briefing
-                goTo = { this.goTo }
-                name = { this.state.name }
-            />
-            : null;
-        const gamefield = screen === 'gamefield'
-            ? <Gamefield
-                endGame = { this.endGame }
-                fireDelay = { gameCfg[difficulty].fireDelay }
-                goTo = { this.goTo }
-                round = { gameCfg[difficulty].round }
-            />
-            : null;
-        const debriefing = screen === 'debriefing'
-            ? <Debriefing
-                goTo = { this.goTo }
-                status = { status }
-            />
-            : null;
+        switch (screen) {
+            case 'home': {
+                displayScreen = <Home
+                    changeGameProps = { this.changeGameProps }
+                    difficulty = { this.state.difficulty }
+                    goTo = { this.goTo }
+                    name = { this.state.name }
+                />;
+                break;
+            }
+            case 'leaderboard': {
+                displayScreen = <Leaderboard goTo = { this.goTo } />;
+                break;
+            }
+            case 'briefing': {
+                displayScreen = <Briefing
+                    goTo = { this.goTo }
+                    name = { this.state.name }
+                />;
+                break;
+            }
+            case 'gamefield': {
+                displayScreen = <Gamefield
+                    endGame = { this.endGame }
+                    fireDelay = { gameCfg[difficulty].fireDelay }
+                    goTo = { this.goTo }
+                    round = { gameCfg[difficulty].round }
+                />;
+                break;
+            }
+            case 'debriefing': {
+                displayScreen = <Debriefing
+                    goTo = { this.goTo }
+                    status = { status }
+                />;
+                break;
+            }
+            default: {
+                displayScreen = null;
+                break;
+            }
+        }
 
         return (
             <section className = { Styles.app }>
-                { home }
-                { leaderboard }
-                { briefing }
-                { gamefield }
-                { debriefing }
+                { displayScreen }
             </section>
         );
     }

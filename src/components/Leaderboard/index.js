@@ -44,8 +44,8 @@ export default class Leaderboard extends Component {
                 hard:   []
             };
 
-            for (const group in records) {
-                for (const key in records[group]) {
+            for (const group in records) {  // eslint-disable-line
+                for (const key in records[group]) { //eslint-disable-line
                     const tempObj = {
                         name:  records[group][key].name,
                         score: records[group][key].score
@@ -53,8 +53,8 @@ export default class Leaderboard extends Component {
 
                     newRecords[group].push(tempObj);
                 }
+                newRecords[group].reverse();
             }
-            //console.log(newRecords);
             this.setState({ records: newRecords });
         });
     }

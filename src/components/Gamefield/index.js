@@ -52,18 +52,18 @@ export default class Gamefield extends Component {
     };
 
     componentWillMount () {
-        const { fireDelay, round } = this.props;
+        const { round } = this.props;
 
         this.setState(({ player, playerBullet, ai, aiBullet }) =>
             ({
                 player: {
-                    fireCounter: fireDelay,
+                    fireCounter: 0,
                     hp:          player.hp,
                     position:    player.position
                 },
                 playerBullet,
                 ai: {
-                    fireCounter: fireDelay,
+                    fireCounter: 0,
                     hp:          ai.hp,
                     position:    ai.position,
                     direction:   'up'
@@ -85,33 +85,48 @@ export default class Gamefield extends Component {
         this.interval = setInterval(() => this._updateEverything(), 200);
     }
 
+    _getPlayerBulletNewX = ({ x, fired }) => {
+        if (fired && x + 35 <= 1000) {
+            return x + 35;
+        } else if (fired) {
+            return 1000;
+        }
+    };
+
+    _getPlayerBulletNewStatus = ({ x, fired }) => {
+        if (fired && x + 35 <= 1000) {
+            return true;
+        } else if (fired) {
+            return false;
+        }
+    };
+
+    _getNewAiPosition = (ai, modifier) => {
+        const { position, direction } = ai;
+
+        if (direction === 'up') {
+            return position - modifier > 100 ? position - modifier : 100;
+        } else if (direction === 'down') {
+            return position + modifier < 430 ? position + modifier : 430;
+        }
+    };
+
+    _getNewAiDirection = (curDirection, position) => {
+        if (position === 100) {
+            return 'down';
+        } else if (position === 430) {
+            return 'up';
+        }
+
+        return curDirection;
+    };
+
     _updateEverything () {
         this.setState(({ player, playerBullet, ai, aiBullet, timer }) => {
-            let playerBulletNewX = playerBullet.x;
-            let playerBulletNewStatus = playerBullet.fired;
-            let newAiPosition = ai.position;
-            let newAiDirection = ai.direction;
             const newTimer = timer - 0.2 > 0 ? timer - 0.2 : 0;
             let playerWon = false;
-
-            if (playerBullet.fired && playerBullet.x + 35 <= 1000) {
-                playerBulletNewX = playerBullet.x + 35;
-            } else if (playerBullet.fired) {
-                playerBulletNewX = 1000;
-                playerBulletNewStatus = false;
-            }
-            if (ai.direction === 'up') {
-                newAiPosition = newAiPosition - 3 > 100
-                    ? newAiPosition - 12 : 100;
-            } else if (ai.direction === 'down') {
-                newAiPosition = newAiPosition + 3 < 430
-                    ? newAiPosition + 12 : 430;
-            }
-            if (newAiPosition === 100) {
-                newAiDirection = 'down';
-            } else if (newAiPosition === 430) {
-                newAiDirection = 'up';
-            }
+            const newAiPosition = this._getNewAiPosition(ai, 12);
+            const newAiDirection = this._getNewAiDirection(ai.direction, newAiPosition);
 
             if (playerBullet.fired) {
                 playerWon = this._evaluateCollision(playerBullet.x, playerBullet.y, newAiPosition);
@@ -130,8 +145,8 @@ export default class Gamefield extends Component {
                         position:    player.position
                     },
                     playerBullet: {
-                        fired: playerBulletNewStatus,
-                        x:     playerBulletNewX,
+                        fired: this._getPlayerBulletNewStatus(playerBullet),
+                        x:     this._getPlayerBulletNewX(playerBullet),
                         y:     playerBullet.y
                     },
                     ai: {
@@ -153,7 +168,6 @@ export default class Gamefield extends Component {
 
         // 25 is rather abitrary number that corrects target zone
         if (pBulletX > 760 && pBulletX < 790 && Math.abs(val) < 25) {
-            //console.log( 'bullet in target!', pBulletX, pBulletY );
             return true;
         }
 
