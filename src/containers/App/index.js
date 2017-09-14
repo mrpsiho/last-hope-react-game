@@ -15,17 +15,17 @@ import Debriefing from '../../components/Debriefing';
 export const gameCfg = {
     easy: {
         fireDelay:       4,
-        round:           30,
+        round:           28,
         scoreMultiplier: 3
     },
     normal: {
         fireDelay:       4,
-        round:           18,
+        round:           20,
         scoreMultiplier: 3
     },
     hard: {
         fireDelay:       5,
-        round:           12,
+        round:           14,
         scoreMultiplier: 3
     }
 };

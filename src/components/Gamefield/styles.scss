@@ -13,6 +13,16 @@
       top: 60px;
       width: 30px;
     }
+
+  }
+
+  .black {
+    position:absolute;
+    top:330px;
+    left:775px;
+    width:44px;
+    height:62px;
+    background:rgba(0,0,0,.5);
   }
 
   .anto {
@@ -27,6 +37,7 @@
       top: 51px;
       width: 30px;
     }
+
   }
 
   .treeone {
@@ -61,9 +72,15 @@
     }
   }
 
-  .bulletPlayer {
+  .playerBullet {
     position: absolute;
     left: 190px;
+    width: 10px;
+  }
+
+  .aiBullet {
+    position: absolute;
+    left: 760px;
     width: 10px;
   }
 

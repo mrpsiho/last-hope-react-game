@@ -34,7 +34,8 @@ const state = {
     },
     aiBullet: {
         fired: false,
-        x:     760
+        x:     760,
+        y:     0
     },
     timer: round // seconds left
 };
@@ -68,10 +69,6 @@ describe('Gamefield (TDD)', () => {
         const type = typeof result.instance().props.round;
 
         expect(type).toEqual('number');
-    });
-
-    test('Initial state check', () => {
-        expect(result.state()).toEqual(state);
     });
 
     test('Must have 1 section element', () => {

@@ -18,3 +18,14 @@ export const getUniqueID = (length) => {
 
     return text;
 };
+
+export const getRandomNumber = (min, max) => {
+    if (typeof min !== 'number') {
+        throw Error('min must be type of number');
+    }
+    if (typeof max !== 'number') {
+        throw Error('max must be type of number');
+    }
+
+    return Math.floor(Math.random() * (max - min + 1) + min);  // eslint-disable-line
+};

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Instruments
 import Styles from './styles.scss';
+import { getRandomNumber } from '../../helpers/index';
 
 // Components
 import Char from '../../components/Char';
@@ -31,7 +32,7 @@ export default class Gamefield extends Component {
         player: {
             fireCounter: 0,
             hp:          10,
-            position:    430
+            position:    getRandomNumber(200, 330)
         },
         playerBullet: {
             fired: false,
@@ -41,12 +42,13 @@ export default class Gamefield extends Component {
         ai: {
             fireCounter: 0,
             hp:          10,
-            position:    430,
+            position:    getRandomNumber(200, 330),
             direction:   'up'
         },
         aiBullet: {
             fired: false,
-            x:     760
+            x:     760,
+            y:     0
         },
         timer: 0
     };
@@ -91,15 +93,23 @@ export default class Gamefield extends Component {
         } else if (fired) {
             return 1000;
         }
+
+        return 190;
     };
 
-    _getPlayerBulletNewStatus = ({ x, fired }) => {
-        if (fired && x + 35 <= 1000) {
-            return true;
+    _getPlayerBulletNewStatus = ({ x, fired }) => fired && x + 35 <= 1000;
+
+    _getAiBulletNewX = ({ x, fired }) => {
+        if (fired && x - 35 >= -10) {
+            return x - 35;
         } else if (fired) {
-            return false;
+            return -10;
         }
+
+        return 760;
     };
+
+    _getAiBulletNewStatus = ({ x, fired }) => fired && x - 35 >= -10;
 
     _getNewAiPosition = (ai, modifier) => {
         const { position, direction } = ai;
@@ -124,17 +134,16 @@ export default class Gamefield extends Component {
     _updateEverything () {
         this.setState(({ player, playerBullet, ai, aiBullet, timer }) => {
             const newTimer = timer - 0.2 > 0 ? timer - 0.2 : 0;
-            let playerWon = false;
             const newAiPosition = this._getNewAiPosition(ai, 12);
             const newAiDirection = this._getNewAiDirection(ai.direction, newAiPosition);
+            const playerWon = this._evaluateCollision(playerBullet, ai.position, 'ai');
+            const aiWon = this._evaluateCollision(aiBullet, player.position, 'player');
 
-            if (playerBullet.fired) {
-                playerWon = this._evaluateCollision(playerBullet.x, playerBullet.y, newAiPosition);
-            }
+            this._aiMayFire();
 
             if (playerWon) {
                 this.props.endGame(true, timer);
-            } else if (timer === 0) {
+            } else if (timer === 0 || aiWon) {
                 this.props.endGame(false);
             } else {
 
@@ -155,7 +164,11 @@ export default class Gamefield extends Component {
                         position:    newAiPosition,
                         direction:   newAiDirection
                     },
-                    aiBullet,
+                    aiBullet: {
+                        fired: this._getAiBulletNewStatus(aiBullet),
+                        x:     this._getAiBulletNewX(aiBullet),
+                        y:     aiBullet.y
+                    },
                     timer: newTimer
                 };
 
@@ -163,15 +176,49 @@ export default class Gamefield extends Component {
         });
     }
 
-    _evaluateCollision (pBulletX, pBulletY, aiPos) {
-        const val = aiPos + 20 - pBulletY;
+    _evaluateCollision (bullet, position, target) {
+        if (target === 'ai') {
+            const aiInRangeX = bullet.x > 775 && bullet.x < 819;
+            const aiInRangeY = bullet.y > position - 12 && bullet.y < position + 58;
 
-        // 25 is rather abitrary number that corrects target zone
-        if (pBulletX > 760 && pBulletX < 790 && Math.abs(val) < 25) {
-            return true;
+            return aiInRangeX && aiInRangeY;
+        }
+
+        if (target === 'player') {
+            const playerInRangeX = bullet.x > 140 && bullet.x < 185;
+            const playerInRangeY = bullet.y > position - 10 && bullet.y < position + 57;
+
+            return playerInRangeX && playerInRangeY;
         }
 
         return false;
+    }
+
+    _aiMayFire () {
+        const { ai, aiBullet } = this.state;
+        const chanceOfFire = Math.random() >= 0.5;
+
+        if (ai.fireCounter === 0 && !aiBullet.fired && chanceOfFire) {
+            this.setState(({ player, playerBullet, timer }) =>
+                ({
+                    player,
+                    playerBullet,
+                    ai: {
+                        fireCounter: this.props.fireDelay,
+                        hp:          ai.hp,
+                        position:    ai.position,
+                        direction:   ai.direction
+                    },
+                    aiBullet: {
+                        fired: true,
+                        x:     760,
+                        y:     ai.position + 20
+                    },
+                    timer
+                })
+            );
+        }
+
     }
 
     _fire () {
@@ -244,25 +291,35 @@ export default class Gamefield extends Component {
     }
 
     render () {
-        const { playerBullet, timer } = this.state;
+        const { playerBullet, aiBullet, timer } = this.state;
         const playerY = this.state.player.position;
         const playerTop = {
             top: `${playerY}px`
         };
-        const bulletTop = {
+        const playerBulletTop = {
             top:  `${playerBullet.y}px`,
             left: `${playerBullet.x}px`
         };
-        const bulletPlayer = playerBullet.fired
+        const playerBulletComp = playerBullet.fired
             ? <Bullet
-                customClass = { Styles.bulletPlayer }
-                customStyle = { bulletTop }
+                customClass = { Styles.playerBullet }
+                customStyle = { playerBulletTop }
             />
             : null;
         const aiY = this.state.ai.position;
         const aiTop = {
             top: `${aiY}px`
         };
+        const aiBulletTop = {
+            top:  `${aiBullet.y}px`,
+            left: `${aiBullet.x}px`
+        };
+        const aiBulletComp = aiBullet.fired
+            ? <Bullet
+                customClass = { Styles.aiBullet }
+                customStyle = { aiBulletTop }
+            />
+            : null;
 
         return (
             <section
@@ -278,7 +335,8 @@ export default class Gamefield extends Component {
                     onClick = { this.clickOnHomeBtn }>
                     Home
                 </button>
-                { bulletPlayer }
+                { playerBulletComp }
+                { aiBulletComp }
                 <Char
                     addGas
                     customClass = { Styles.prota }

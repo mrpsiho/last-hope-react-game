@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 // Instruments
 import Styles from './styles.scss';
@@ -46,16 +47,23 @@ export default class Debriefing extends Component {
             </button>
             <Rogers customClass = { Styles.rogers } />
             <span className = { Styles.captain }>Captain Rogers</span>
-            <CSSTransition
-                appear
-                classNames = 'help'
-                timeout = { 1200 }>
-                <HelpTip
-                    customClass = { Styles.tip }
-                    message = 'Use arrows keys to move Up and Down.
-                    Press "space" to fire.'
-                />
-            </CSSTransition>
+            <TransitionGroup>
+                <CSSTransition
+                    appear
+                    classNames = { {
+                        appear:       Styles.helpAppear,
+                        appearActive: Styles.helpAppearActive,
+                        exit:         Styles.helpExit,
+                        exitActive:   Styles.helpExitActive
+                    } }
+                    timeout = { 1200 }>
+                    <HelpTip
+                        customClass = { Styles.tip }
+                        message = 'Use arrows keys to move Up and Down.
+                        Press "space" to fire.'
+                    />
+                </CSSTransition>
+            </TransitionGroup>
         </section>);
     }
 }

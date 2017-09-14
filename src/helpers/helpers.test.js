@@ -1,6 +1,6 @@
 // Core
 import React from 'react';
-import { getCurrentTime, getUniqueID } from './';
+import { getCurrentTime, getUniqueID, getRandomNumber } from './';
 
 describe('Helpers - getCurrentTime:', () => {
     test('must be a function', () => {
@@ -34,6 +34,36 @@ describe('Helpers - getUniqueID:', () => {
 
         expect(getUniqueIDWithError).toThrowError(
             'length must be type of number'
+        );
+    });
+});
+
+describe('Helpers - getRandomNumber:', () => {
+    test('must be a function', () => {
+        expect(typeof getRandomNumber).toBe('function');
+    });
+
+    test('must return an integer', () => {
+        expect(typeof getRandomNumber(5, 25)).toBe('number');
+    });
+
+    test('min must be type of number', () => {
+        function getRandomNumberWithError () {
+            getRandomNumber(null, 'smth');
+        }
+
+        expect(getRandomNumberWithError).toThrowError(
+            'min must be type of number'
+        );
+    });
+
+    test('max must be type of number', () => {
+        function getRandomNumberWithError () {
+            getRandomNumber(4, 'smth');
+        }
+
+        expect(getRandomNumberWithError).toThrowError(
+            'max must be type of number'
         );
     });
 });

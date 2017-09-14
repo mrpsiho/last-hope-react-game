@@ -34,10 +34,10 @@ export default class Leaderboard extends Component {
     };
 
     componentWillMount () {
-        const recordsRef = firebase.database().ref('records');
-
-        recordsRef.on('value', (snapshot) => {
+        this.recordsRef = firebase.database().ref('records');
+        this.recordsRef.on('value', (snapshot) => {
             const records = snapshot.val();
+
             const newRecords = {
                 easy:   [],
                 normal: [],
@@ -53,10 +53,16 @@ export default class Leaderboard extends Component {
 
                     newRecords[group].push(tempObj);
                 }
+                newRecords[group].sort((a, b) => a.score - b.score);
                 newRecords[group].reverse();
+                newRecords[group] = newRecords[group].slice(0, 9);
             }
             this.setState({ records: newRecords });
         });
+    }
+
+    componentWillUnmount () {
+        this.recordsRef.off();
     }
 
     _clickOnHomeBtn () {

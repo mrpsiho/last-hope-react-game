@@ -41,20 +41,20 @@
     text-shadow: -3px 3px 0 $textShadow;
   }
 
-  .help-appear {
+  .helpAppear {
     opacity: 0.01;
   }
 
-  .help-appear.help-appear-active {
+  .helpAppearActive {
     opacity: 1;
     transition: opacity 1200ms ease-in;
   }
 
-  .help-exit {
+  .helpExit {
     opacity: 1;
   }
 
-  .help-exit.help-exit-active {
+  .helpExitActive {
     opacity: 0.01;
     transition: opacity 1200ms ease-in;
   }
